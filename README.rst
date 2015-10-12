@@ -10,11 +10,13 @@ Under development.
 
 #usage example
 
-# should be low in apps list (so others can overwrite templates)
+# should be high in apps list (so others can overwrite templates)
 # where in middleware list?
 
 # DISPLAY_EXCEPTIONS_BASE_TEMPLATE
 
-make sure these exceptions are not logged
+! make sure these exceptions are not logged
+
+! setup.py and pip etc
 
 

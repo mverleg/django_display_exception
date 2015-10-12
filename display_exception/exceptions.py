@@ -4,7 +4,7 @@
 	http://www.smartlabsoftware.com/ref/http-status-codes.htm
 """
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 
 class DisplayableException(Exception):
@@ -15,12 +15,30 @@ class DisplayableException(Exception):
 	default_template = 'exceptions/base.html'
 	default_header = _('Please note...')
 
-	def __init__(self, message, header = None, status_code = None, template = None, *err_args, **err_kwargs):
+	def __init__(self, message, header = None, next = None, status_code = None, template = None, context = None, *err_args, **err_kwargs):
+		"""
+			Create a displayable exception.
+
+			:param message: The message to be displayed, describing what went wrong.
+			:param header: If set, overrules the default header for the error display page.
+			:param next: The url of the page the user should continue, or a callable to generate said url.
+			:param status_code: If set, overrules the default http status code of this exception.
+			:param template: If set, overrules the default template used to render this exception.
+			:param context: Any extra context for the template (only useful for custom templates).
+			:param err_args: Positional aguments to be passed on to Exception.
+			:param err_kwargs: Keyword arguments to be passed on to Exception.
+			:return:
+
+			Argument order may change; use keyword arguments for any arguments other than message and header.
+		"""
 		super(DisplayableException, self).__init__(*err_args, **err_kwargs)
 		self.message = message
+		if callable(next):
+			self.next = next() if callable(next) else next
 		self.header = header or self.default_header
 		self.status_code = status_code or self.default_status_code
 		self.template = template or self.default_template
+		self.context = context or {}
 
 
 class Notification(Exception):
