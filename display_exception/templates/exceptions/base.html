@@ -1,11 +1,13 @@
 
 {% block content %}
-	<h1>{{ header }}</h1>
+	<h1>{% if caption %}{{ caption }}{% else %}Please note...{% endif %}</h1>
 
 	<p>{{ message }}</p>
 
 	{% if next %}
 		<p><a href="{{ next }}">Continue</a></p>
+	{% else %}
+		<p><a href="/">Okay</a></p>
 	{% endif %}
 {% endblock content %}
 

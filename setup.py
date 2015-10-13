@@ -12,7 +12,7 @@ setup(
 	version='v0.1',
 	author='Mark V',
 	author_email='mdilligaf@gmail.com',
-	packages=find_packages(),
+	packages=['display_exception'],
 	include_package_data=True,
 	url='git+https://github.com/mverleg/django_display_exception',
 	license='Revised BSD License',

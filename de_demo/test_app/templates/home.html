@@ -1,0 +1,14 @@
+
+<p><a href="{% url 'login' %}">login</a></p>
+<p><a href="{% url 'user_update_name' %}?user={{ request.user.username }}">change name</a></p>
+<p><a href="{% url 'user_update_email' %}?user=piet">change email</a></p>
+<div>
+	<p>view a user:</p>
+	<form action="{% url 'user_show' %}" method="GET">
+		<label>username</label>
+		<input type="text" name="user" />
+		<input type="submit" value="go" />
+	</form>
+</div>
+
+

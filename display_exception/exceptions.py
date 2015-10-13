@@ -4,7 +4,12 @@
 	http://www.smartlabsoftware.com/ref/http-status-codes.htm
 """
 
+from django.conf import settings
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
+
+
+BASE_TEMPLATE = getattr(settings, 'DISPLAY_EXCEPTIONS_BASE_TEMPLATE', 'exceptions/base.html')
 
 
 class DisplayableException(Exception):
@@ -12,15 +17,15 @@ class DisplayableException(Exception):
 		Exceptions derived from this class will be caught and shown to the user.
 	"""
 	default_status_code = 200
-	default_template = 'exceptions/base.html'
+	default_template = BASE_TEMPLATE
 	default_header = _('Please note...')
 
-	def __init__(self, message, header = None, next = None, status_code = None, template = None, context = None, *err_args, **err_kwargs):
+	def __init__(self, message, caption = None, next = None, status_code = None, template = None, context = None, *err_args, **err_kwargs):
 		"""
 			Create a displayable exception.
 
 			:param message: The message to be displayed, describing what went wrong.
-			:param header: If set, overrules the default header for the error display page.
+			:param caption: If set, overrules the default header for the error display page.
 			:param next: The url of the page the user should continue, or a callable to generate said url.
 			:param status_code: If set, overrules the default http status code of this exception.
 			:param template: If set, overrules the default template used to render this exception.
@@ -29,16 +34,29 @@ class DisplayableException(Exception):
 			:param err_kwargs: Keyword arguments to be passed on to Exception.
 			:return:
 
-			Argument order may change; use keyword arguments for any arguments other than message and header.
+			Argument order may change; use keyword arguments for any arguments other than message and caption.
 		"""
 		super(DisplayableException, self).__init__(*err_args, **err_kwargs)
 		self.message = message
+		self.caption = caption
 		if callable(next):
 			self.next = next() if callable(next) else next
-		self.header = header or self.default_header
 		self.status_code = status_code or self.default_status_code
 		self.template = template or self.default_template
 		self.context = context or {}
+
+	def render(self, request, exception):
+		context = {
+			'exception': exception,
+			'header': exception.caption,
+			'message': exception.message,
+			'next': next,
+			'EXCEPTION_BASE_TEMPLATE': BASE_TEMPLATE,
+		}
+		context.update(exception.context)
+		response = render(request, exception.template, context)
+		response.status_code = exception.status_code
+		return response
 
 
 class Notification(Exception):
@@ -63,7 +81,17 @@ class PermissionDenied(DisplayableException):
 	"""
 	default_status_code = 550
 	default_template = 'exceptions/permission_denied.html'
-	default_header = _('Permission denied')
+
+
+class BadRequest(DisplayableException):
+	"""
+		400 Bad Request
+
+		The request could not be understood by the server due to malformed syntax.
+		The client should not repeat the request without modifications.
+	"""
+	default_status_code = 400
+	default_template = 'exceptions/bad_request.html'
 
 
 class NotFound(DisplayableException):
@@ -75,7 +103,6 @@ class NotFound(DisplayableException):
 	"""
 	default_status_code = 404
 	default_template = 'exceptions/not_found.html'
-	default_header = _('Not found')
 
 
 class NotImplemented(DisplayableException):
@@ -86,6 +113,5 @@ class NotImplemented(DisplayableException):
 	"""
 	default_status_code = 501
 	default_template = 'exceptions/not_implemented.html'
-	default_header = _('Not implemented (yet)')
 
 
