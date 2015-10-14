@@ -186,7 +186,7 @@ and implement the three blocks mentioned (caption, message, actions).
 License
 ---------------------------------------
 
-Revised BSD License; at your own risk, you can mostly do whatever you want with this code, just don't use my name for promotion and keep the license file.
+Revised BSD License; at your own risk, you can mostly do whatever you want with this code, just don't use my name for promotion and do keep the license file.
 
 .. _programmers.stackexchange: http://programmers.stackexchange.com/questions/276302/how-to-handle-django-get-single-instance-in-view-pattern
 

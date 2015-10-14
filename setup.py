@@ -1,35 +1,48 @@
 # -*- coding: utf-8 -*-
 
 """
-	for installing with pip
+	Adapted from https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 """
 
-from distutils.core import setup
-import os
+from setuptools import setup
 
 
-def gen_data_files(*dirs):
-	results = []
-	for src_dir in dirs:
-		for root,dirs,files in os.walk(src_dir):
-			results.append((root, map(lambda f:root + "/" + f, files)))
-	return results
-print(dict(gen_data_files('display_exception/templates/exceptions',)))
+with open('README.rst', 'r') as fh:
+	readme = fh.read()
+
 
 setup(
 	name='django-display-exception',
-	version='v0.6',
-	author='Mark V',
-	author_email='mdilligaf@gmail.com',
-	packages=['display_exception'],
-	#package_data={'display_exception': ['display_exception/templates/exceptions/base.html']},
-	#package_data = dict(gen_data_files('display_exception/templates/exceptions',)),
-	include_package_data=True,
-	url='https://github.com/mverleg/django_display_exception',
-	license='Revised BSD License (LICENSE.txt)',
 	description='This app can (slightly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.',
-	zip_safe=True,
-	install_requires = [
+	long_description=readme,
+	url='https://github.com/mverleg/django_display_exception',
+	author='Mark V',
+	maintainer='(the author)',
+	author_email='mdilligaf@gmail.com',
+	license='Revised BSD License (LICENSE.txt)',
+	keywords=['django', 'coding-style',],
+	version='0.7',
+	packages=['display_exception'],
+	include_package_data=True,
+	zip_safe=False,
+	classifiers=[
+		'Development Status :: 5 - Production/Stable',
+		'Intended Audience :: Developers',
+		'Natural Language :: English',
+		'License :: OSI Approved :: BSD License',
+		'Operating System :: OS Independent',
+		'Programming Language :: Python',
+		'Programming Language :: Python :: 2',
+		'Programming Language :: Python :: 2.6',
+		'Programming Language :: Python :: 2.7',
+		'Programming Language :: Python :: 3',
+		'Programming Language :: Python :: 3.3',
+		'Programming Language :: Python :: 3.4',
+		'Programming Language :: Python :: 3.5',
+		'Programming Language :: Python :: Implementation :: PyPy',
+		'Topic :: Software Development :: Libraries :: Python Modules',
+	],
+	install_requires=[
 		'django',
 	],
 )
