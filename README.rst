@@ -139,6 +139,8 @@ Third, add the middleware that will handle displaying the exceptions::
 
 In this case, you probably want Django Display Exceptions to do it's thing before before any logging or fallbacks or anything. This means that it should be below any such middleware (since it's an exception, which are handled in the same order as responses). So put it somewhere at the bottom.
 
+There are no migrations. In production, if you want to use the default templates, you'll have to call ``collectstatic``.
+
 That is all; you're good to go!
 
 Built-in displayable exceptions
@@ -175,13 +177,13 @@ You can change the base template used for exceptions in settings::
 
 	DISPLAY_EXCEPTIONS_BASE_TEMPLATE = 'exceptions/base.html'
 
-Unless you're also overriding all the derived templates, your base template should contain the blocks ``caption``, ``message`` and ``actions`` (for buttons).
+Unless you're also overriding all the derived templates, your base template should contain the blocks ``caption``, ``message``, `icon`` and ```actions`` (for buttons).
 
 You can also override templates for each of the exceptions. Just create a file called for example ``exceptions/permission_denied.html`` (see notes for ``INSTALLED_APPS`` order). If you want to use the exception base template, these templates should::
 
 	{% extends EXCEPTION_BASE_TEMPLATE %}
 
-and implement the three blocks mentioned (caption, message, actions).
+and implement the blocks mentioned.
 
 License
 ---------------------------------------
