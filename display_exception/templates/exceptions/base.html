@@ -1,28 +1,62 @@
 
-{% block content %}
-	<h1>
-		{% block caption %}
-			{% if caption %}
-				{{ caption }}
-			{% else %}
-				Please note...
-			{% endif %}
-		{% endblock caption %}
-	</h1>
+{% load staticfiles %}
 
-	<p>
-		{% block message %}
-			{{ message|linebreaks }}
-		{% endblock message %}
-	</p>
-
-	{% block actions %}
-		{% if next %}
-			<p><a href="{{ next }}">Continue</a></p>
-		{% else %}
-			<p><a href="/">Okay</a></p>
-		{% endif %}
-	{% endblock actions %}
-{% endblock content %}
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>{% firstof caption 'Please note...' %}</title>
+		<meta name="author" content="markv.nl">
+		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/display_exception.css' %}">
+	</head>
+	<body>
+		<div id="page">
+			<div class="container">
+				<div id="content" class="jumbotron">
+					<div class="row">
+						{% block content %}
+							<div class="col-xs-12 col-md-9  col-md-push-3">
+								<h1 id="caption">
+									{% block caption %}
+										{% firstof caption 'Please note...' %}
+									{% endblock caption %}
+								</h1>
+							</div>
+							<div id='empty_cell' class="col-xs-12 col-md-3 col-md-pull-9">
+								&nbsp;
+							</div>
+							</div>
+							<div class="row">
+							<div id="icon" class="col-xs-12 col-md-3">
+								{% block icon %}
+									<span class="glyphicon glyphicon-question-sign"></span>
+								{% endblock icon %}
+							</div>
+							<div class="col-xs-12 col-md-9">
+									<p id="message">
+										{% block message %}
+											{{ message|linebreaks }}
+										{% endblock message %}
+									</p>
+								{% block actions %}
+									<div id="actions">
+										<div class="btn-group btn-group-justified" role="group">
+											{% if next %}
+												<a href="{{ next }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> Continue</a>
+											{% else %}
+												<a href="/" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span> Okay</a>
+											{% endif %}
+										</div>
+									</div>
+								{% endblock actions %}
+							</div>
+						{% endblock content %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
 
 

@@ -1,7 +1,7 @@
 
 import os
 from tempfile import gettempdir
-
+from os.path import join
 
 DISPLAY_EXCEPTIONS_BASE_TEMPLATE = 'exceptions/base.html'  # optional setting
 
@@ -17,6 +17,7 @@ INSTALLED_APPS = (
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
+	'django.contrib.staticfiles',
 	'test_app',
 )
 
@@ -55,5 +56,8 @@ DATABASES = {
 ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'wsgi.application'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = join(BASE_DIR, 'static')
 
 
