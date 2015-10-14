@@ -5,3 +5,4 @@
 *.sqlite3
 /.pypirc
 /dist/
+/MANIFEST

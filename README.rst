@@ -1,7 +1,7 @@
 Django Display Exception
 ---------------------------------------
 
-This app can (sligtly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.
+This app can (slightly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.
 
 Specifically, it offers an alternative way to handle a failing check in a view fails (object not found, access denied, etc). It let's you throw an special exception that is shown to the user in a pretty way. No need to worry about returning error messages up the chain.
 
