@@ -2,6 +2,9 @@
 import os
 from tempfile import gettempdir
 
+
+DISPLAY_EXCEPTIONS_BASE_TEMPLATE = 'exceptions/base.html'  # optional setting
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = 'very_secret_key'
@@ -9,11 +12,11 @@ SECRET_KEY = 'very_secret_key'
 DEBUG = True
 
 INSTALLED_APPS = (
+	'display_exception',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
-	'display_exception',
 	'test_app',
 )
 

@@ -1,14 +1,28 @@
 
 {% block content %}
-	<h1>{% if caption %}{{ caption }}{% else %}Please note...{% endif %}</h1>
+	<h1>
+		{% block caption %}
+			{% if caption %}
+				{{ caption }}
+			{% else %}
+				Please note...
+			{% endif %}
+		{% endblock caption %}
+	</h1>
 
-	<p>{{ message }}</p>
+	<p>
+		{% block message %}
+			{{ message|linebreaks }}
+		{% endblock message %}
+	</p>
 
-	{% if next %}
-		<p><a href="{{ next }}">Continue</a></p>
-	{% else %}
-		<p><a href="/">Okay</a></p>
-	{% endif %}
+	{% block actions %}
+		{% if next %}
+			<p><a href="{{ next }}">Continue</a></p>
+		{% else %}
+			<p><a href="/">Okay</a></p>
+		{% endif %}
+	{% endblock actions %}
 {% endblock content %}
 
 
