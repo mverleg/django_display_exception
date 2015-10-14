@@ -5,19 +5,20 @@
 """
 
 from distutils.core import setup
-from setuptools import find_packages
+
 
 setup(
 	name='django-display-exception',
-	version='v0.1',
+	version='v0.4',
 	author='Mark V',
 	author_email='mdilligaf@gmail.com',
 	packages=['display_exception'],
 	include_package_data=True,
-	url='git+https://github.com/mverleg/django_display_exception',
-	license='Revised BSD License',
-	description='see README.rst',  #todo
+	url='https://github.com/mverleg/django_display_exception',
+	license='Revised BSD License (LICENSE.txt)',
+	description='This app can (sligtly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.',
 	zip_safe=True,
 	install_requires = [
+		'django',
 	],
 )

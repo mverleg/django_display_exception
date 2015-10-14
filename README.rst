@@ -10,7 +10,7 @@ The 'problem' (or 'inconvenience' really) that this solves is explained in my pr
 Example usage
 ---------------------------------------
 
-There is a simple example (the whole app is simple, really) contained in the de_demo directory of this repository.
+There is a simple example (the whole app is simple, really) contained in the de_demo directory of this repository. For a preview, check the last code block in this subsection.
 
 Let's say you have an app and you want to be able to edit some object belonging to a user, like their account. Normally you would do something like::
 
@@ -108,14 +108,14 @@ So maybe we can handle the exceptional situations using Exceptions? If we use no
 		check_self_only(request.user, user)
 		# handle the email update here
 
-**Shorter, more readable, almost no code repetition and no dynamic typing abuse**!
+*Shorter, more readable, almost no code repetition and no dynamic typing abuse*!
 
 Note that these are special exceptions. If some other error occurs, it will be handled just like it normally would; it will not be rendered by Django Display Exception.
 
 Configuration
 ---------------------------------------
 
-I know what you're thinking: by the gods, this is genius, I want in on this!
+I know what you're thinking: *by the gods, this is genius, I want in on this!*
 
 Setup is easy: install with pip in your virtual environment (or globally, I won't judge)::
 
@@ -132,10 +132,10 @@ If you want to override the exception templates, you will have to place the over
 
 Third, add the middleware that will handle displaying the exceptions::
 
-MIDDLEWARE_CLASSES = (
-	...
-	'display_exception.DisplayExceptionMiddleware',
-)
+    MIDDLEWARE_CLASSES = (
+    	...
+    	'display_exception.DisplayExceptionMiddleware',
+    )
 
 In this case, you probably want Django Display Exceptions to do it's thing before before any logging or fallbacks or anything. This means that it should be below any such middleware (since it's an exception, which are handled in the same order as responses). So put it somewhere at the bottom.
 
