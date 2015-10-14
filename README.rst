@@ -1,4 +1,4 @@
-Django Display Exception
+Django Display Exceptions
 ---------------------------------------
 
 This app can (slightly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.
@@ -87,7 +87,7 @@ Looks secure! But now we want another view to update the name. Also we'll want t
 
 That is a bit better, but there's still a lot of checking going on in our views. And the dynamic typing abuse isn't exactly beautiful.
 
-So maybe we can handle the exceptional situations using Exceptions? If we use normal ones, we have to catch them in the main view, which will have us repeat a lot of code again. So this is where Django Display Exception comes in! We simply raise displayable exceptions::
+So maybe we can handle the exceptional situations using Exceptions? If we use normal ones, we have to catch them in the main view, which will have us repeat a lot of code again. So this is where Django Display Exceptions comes in! We simply raise displayable exceptions::
 
 	# one of the functions (others are implied)
 	def try_to_get_user(dic, key = 'user'):
@@ -110,7 +110,7 @@ So maybe we can handle the exceptional situations using Exceptions? If we use no
 
 *Shorter, more readable, almost no code repetition and no dynamic typing abuse*!
 
-Note that these are special exceptions. If some other error occurs, it will be handled just like it normally would; it will not be rendered by Django Display Exception.
+Note that these are special exceptions. If some other error occurs, it will be handled just like it normally would; it will not be rendered by Django Display Exceptions.
 
 Configuration
 ---------------------------------------
@@ -119,22 +119,22 @@ I know what you're thinking: *by the gods, this is genius, I want in on this!*
 
 Setup is easy: install with pip in your virtual environment (or globally, I won't judge)::
 
-	pip install django_display_exception
+	pip install django_display_exceptions
 
-Second, add ``display_exception`` to ``INSTALLED_APPS``::
+Second, add ``display_exceptions`` to ``INSTALLED_APPS``::
 
 	INSTALLED_APPS = (
-		'display_exception',
+		'display_exceptions',
 		...
 	)
 
-If you want to override the exception templates, you will have to place the override app below ``display_exception``. That's the only condition, so might as well place ``display_exception`` somewhere at the top.
+If you want to override the exception templates, you will have to place the override app below ``display_exceptions``. That's the only condition, so might as well place ``display_exceptions`` somewhere at the top.
 
 Third, add the middleware that will handle displaying the exceptions::
 
     MIDDLEWARE_CLASSES = (
     	...
-    	'display_exception.DisplayExceptionMiddleware',
+    	'display_exceptions.DisplayExceptionMiddleware',
     )
 
 In this case, you probably want Django Display Exceptions to do it's thing before before any logging or fallbacks or anything. This means that it should be below any such middleware (since it's an exception, which are handled in the same order as responses). So put it somewhere at the bottom.
@@ -145,6 +145,8 @@ That is all; you're good to go!
 
 Built-in displayable exceptions
 ---------------------------------------
+
+The exceptions that are built in, and that are caught by the middleware:
 
 * *PermissionDenied* (550 Permission Denied): the current account doesn't have access to this resource.
 * *NotFound* (404 Not Found): whatever the user requested could not be found (temporarily or permanently).

@@ -1,5 +1,5 @@
 
-from display_exception import DisplayableException
+from display_exceptions import DisplayableException
 
 
 class DisplayExceptionMiddleware(object):
