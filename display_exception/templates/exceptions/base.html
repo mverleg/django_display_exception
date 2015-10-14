@@ -5,10 +5,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>{% firstof caption 'Please note...' %}</title>
+		<title>{% block title %}{% firstof caption 'Please note...' %}{% endblock title %}</title>
 		<meta name="author" content="markv.nl">
 		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/bootstrap/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/display_exception.css' %}">
+		<style type="text/css">{% block style %}{% endblock style %}</style>
 	</head>
 	<body>
 		<div id="page">
@@ -29,22 +30,22 @@
 									{% endblock caption %}
 								</h1>
 
-								<p id="message">
+								<div id="message">
 									{% block message %}
 										{{ message|linebreaks }}
 									{% endblock message %}
-								</p>
+								</div>
 
 								<div id="actions">
-									{% block actions %}
 									<div class="btn-group btn-group-justified" role="group">
-										{% if next %}
-											<a href="{{ next }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> Continue</a>
-										{% else %}
-											<a href="/" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span> Okay</a>
-										{% endif %}
+										{% block actions %}
+											{% if next %}
+												<a href="{{ next }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> Continue</a>
+											{% else %}
+												<a href="/" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span> Okay</a>
+											{% endif %}
+										{% endblock actions %}
 									</div>
-									{% endblock actions %}
 								</div>
 							</div>
 						{% endblock content %}

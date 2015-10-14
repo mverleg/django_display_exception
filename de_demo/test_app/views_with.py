@@ -1,7 +1,10 @@
 
+from random import randint
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render
-from display_exception import PermissionDenied, NotImplemented
+from django.utils.lorem_ipsum import paragraphs, words
+from display_exception import NotYetImplemented, Notification
 from functions import try_to_get_user, check_user_access, check_self_only
 
 
@@ -10,7 +13,7 @@ def home(request):
 
 
 def login(request):
-	raise NotImplemented('Logging in is a top prioriy for us and we\'ll try to get it working a.s.a.p.!', next = 'home', template = None, context = None)
+	raise NotYetImplemented('Logging in is a top prioriy for us and we\'ll try to get it working a.s.a.p.!', next = 'home', template = None, context = None)
 
 
 def user_update_name(request):
@@ -35,5 +38,14 @@ def user_show(request):
 	# note that things like database errors and non-existent templates
 	# still cause a crash and logging etc like normally; they are not
 	# displayed to the user (except in DEBUG mode as always).
+
+
+def preview_exception(request, Ex):
+	raise Ex(
+		'\n\n'.join(p[:125] for p in paragraphs(2, common = False)),
+		caption = words(4),
+		next = lambda: reverse('home') if randint(0, 2) == 1 else None,
+	)
+
 
 

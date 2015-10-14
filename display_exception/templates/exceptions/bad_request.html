@@ -1,4 +1,17 @@
 
 {% extends EXCEPTION_BASE_TEMPLATE %}
 
-{# login form if not logged in?  perhaps just login url #}
+
+{% block icon %}
+	<span class="glyphicon glyphicon-flash"></span>
+{% endblock icon %}
+
+{% block title %}
+	{% firstof caption 'Not understood' %}
+{% endblock title %}
+
+{% block caption %}
+	{% firstof caption 'Cannot understand your request' %}
+{% endblock caption %}
+
+

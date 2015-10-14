@@ -149,7 +149,7 @@ Built-in displayable exceptions
 * *PermissionDenied* (550 Permission Denied): the current account doesn't have access to this resource.
 * *NotFound* (404 Not Found): whatever the user requested could not be found (temporarily or permanently).
 * *BadRequest* (400 BadRequest): what the user sent is not correctly formatted (e.g. non-integer id).
-* *NotImplemented* (501 Not Implemented): the requested functionality isn't supported yet.
+* *NotYetImplemented* (501 Not Implemented): the requested functionality isn't supported yet.
 * *Notification* (200 Ok): no error, just display something.
 
 If there's no suitable exception in the list, you can subclass ``DisplayableException`` yourself.

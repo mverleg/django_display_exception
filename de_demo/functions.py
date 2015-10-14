@@ -1,10 +1,8 @@
 
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
-from display_exception import PermissionDenied, NotImplemented, NotFound
+from display_exception import PermissionDenied, NotFound
 
 
 def try_to_get_user(dic, key = 'user'):

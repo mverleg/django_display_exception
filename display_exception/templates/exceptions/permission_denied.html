@@ -1,4 +1,31 @@
 
 {% extends EXCEPTION_BASE_TEMPLATE %}
 
-{# login form if not logged in?  perhaps just login url #}
+
+{% block icon %}
+	<span class="glyphicon glyphicon-eye-close"></span>
+{% endblock icon %}
+
+{% block title %}
+	{% firstof caption 'Access denied' %}
+{% endblock title %}
+
+{% block caption %}
+	{% firstof caption 'Access denied' %}
+{% endblock caption %}
+
+{% block message %}
+	{{ block.super }}
+	{% if not request.user.is_authenticated %}
+		<p>If you have an account, you could login and try again.</p>
+	{% endif %}
+{% endblock message %}
+
+{% block actions %}
+	{{ block.super }}
+	{% if not request.user.is_authenticated and LOGIN_URL %}
+		<a href="{{ LOGIN_URL }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-user"></span> Login</a>
+	{% endif %}
+{% endblock actions %}
+
+

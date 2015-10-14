@@ -39,8 +39,7 @@ class DisplayableException(Exception):
 		super(DisplayableException, self).__init__(*err_args, **err_kwargs)
 		self.message = message
 		self.caption = caption
-		if callable(next):
-			self.next = next() if callable(next) else next
+		self.next = next() if callable(next) else next
 		self.status_code = status_code or self.default_status_code
 		self.template = template or self.default_template
 		self.context = context or {}
@@ -50,8 +49,9 @@ class DisplayableException(Exception):
 			'exception': exception,
 			'header': exception.caption,
 			'message': exception.message,
-			'next': next,
+			'next': self.next,
 			'EXCEPTION_BASE_TEMPLATE': BASE_TEMPLATE,
+			'LOGIN_URL': settings.LOGIN_URL,
 		}
 		context.update(exception.context)
 		response = render(request, exception.template, context)
@@ -59,7 +59,7 @@ class DisplayableException(Exception):
 		return response
 
 
-class Notification(Exception):
+class Notification(DisplayableException):
 	"""
 		200 Ok
 
@@ -105,7 +105,7 @@ class NotFound(DisplayableException):
 	default_template = 'exceptions/not_found.html'
 
 
-class NotImplemented(DisplayableException):
+class NotYetImplemented(DisplayableException):
 	"""
 		501 Not Implemented
 

@@ -2,3 +2,16 @@
 {% extends EXCEPTION_BASE_TEMPLATE %}
 
 
+{% block icon %}
+	<span class="glyphicon glyphicon-search"></span>
+{% endblock icon %}
+
+{% block title %}
+	{% firstof caption 'Not found' %}
+{% endblock title %}
+
+{% block caption %}
+	{% firstof caption 'Not found' %}
+{% endblock caption %}
+
+

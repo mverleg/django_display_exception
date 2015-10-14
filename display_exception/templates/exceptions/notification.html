@@ -2,3 +2,16 @@
 {% extends EXCEPTION_BASE_TEMPLATE %}
 
 
+{% block icon %}
+	<span class="glyphicon glyphicon-info-sign"></span>
+{% endblock icon %}
+
+{% block title %}
+	{% firstof caption 'Please note' %}
+{% endblock title %}
+
+{% block caption %}
+	{% firstof caption 'Please note...' %}
+{% endblock caption %}
+
+
