@@ -1,4 +1,4 @@
 include LICENSE.txt
 include README.rst
-recursive-include display_exception *.html *.css
-recursive-include display_exception/static/exceptions/bootstrap/fonts *
+recursive-include display_exceptions *.html *.css
+recursive-include display_exceptions/static/exceptions/bootstrap/fonts *

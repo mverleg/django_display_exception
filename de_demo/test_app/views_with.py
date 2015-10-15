@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.lorem_ipsum import paragraphs, words
-from display_exception import NotYetImplemented, Notification
-from functions import try_to_get_user, check_user_access, check_self_only
+from display_exceptions import NotYetImplemented, Notification
+from test_app.functions import try_to_get_user, check_user_access, check_self_only
 
 
 def home(request):

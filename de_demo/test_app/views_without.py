@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
-from functions import check_user_access, check_self_only
+from test_app.functions import check_user_access, check_self_only
 
 
 def user_update_name_allhere(request):

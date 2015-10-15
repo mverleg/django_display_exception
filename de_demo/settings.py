@@ -12,7 +12,7 @@ SECRET_KEY = 'very_secret_key'
 DEBUG = True
 
 INSTALLED_APPS = (
-	'display_exception',
+	'display_exceptions',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -27,7 +27,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-	'display_exception.DisplayExceptionMiddleware',
+	'display_exceptions.DisplayExceptionMiddleware',
 )
 
 TEMPLATES = [
@@ -49,7 +49,7 @@ TEMPLATES = [
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': '{0:s}/{1:s}'.format(gettempdir(), 'tmp_display_exception_db.sqlite3'),
+		'NAME': '{0:s}/{1:s}'.format(gettempdir(), 'tmp_display_exceptions_db.sqlite3'),
 	}
 }
 

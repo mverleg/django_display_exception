@@ -1,7 +1,7 @@
 
 from django.conf.urls import include, url
 from django.contrib import admin
-from display_exception import PermissionDenied, NotFound, BadRequest, Notification, NotYetImplemented
+from display_exceptions import PermissionDenied, NotFound, BadRequest, Notification, NotYetImplemented
 from test_app.views_with import home, login, user_update_name, user_update_email, user_show, preview_exception
 
 
