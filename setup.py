@@ -10,9 +10,8 @@ from setuptools import setup
 with open('README.rst', 'r') as fh:
 	readme = fh.read()
 
-
 setup(
-	name='django-display-exception',
+	name='django-display-exceptions',
 	description='This app can (slightly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.',
 	long_description=readme,
 	url='https://github.com/mverleg/django_display_exception',
@@ -21,8 +20,8 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='Revised BSD License (LICENSE.txt)',
 	keywords=['django', 'coding-style',],
-	version='1.0',
-	packages=['display_exception'],
+	version='1.1',
+	packages=['display_exceptions'],
 	include_package_data=True,
 	zip_safe=False,
 	classifiers=[
