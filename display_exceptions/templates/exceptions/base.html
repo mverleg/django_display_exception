@@ -1,11 +1,15 @@
 
 {% load staticfiles %}
 
+{% load i18n %}
+
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>{% block title %}{% firstof caption 'Please note...' %}{% endblock title %}</title>
+		{% trans 'Please note...' as title %}
+		<title>{% block title %}{% firstof caption title %}{% endblock title %}</title>
 		<meta name="author" content="markv.nl">
 		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/bootstrap/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/display_exception.css' %}">
@@ -26,7 +30,8 @@
 							<div class="col-xs-12 col-md-9">
 								<h1 id="caption">
 									{% block caption %}
-										{% firstof caption 'Please note...' %}
+										{% trans 'Please note...' as cap %}
+										{% firstof caption cap %}
 									{% endblock caption %}
 								</h1>
 
@@ -40,9 +45,9 @@
 									<div class="btn-group btn-group-justified" role="group">
 										{% block actions %}
 											{% if next %}
-												<a href="{{ next }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> Continue</a>
+												<a href="{{ next }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right"></span> {% trans 'Continue' %}</a>
 											{% else %}
-												<a href="/" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span> Okay</a>
+												<a href="/" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span> {% trans 'Okay' %}</a>
 											{% endif %}
 										{% endblock actions %}
 									</div>

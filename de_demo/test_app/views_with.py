@@ -13,7 +13,7 @@ def home(request):
 
 
 def login(request):
-	raise NotYetImplemented('Logging in is a top prioriy for us and we\'ll try to get it working a.s.a.p.!', next = 'home', template = None, context = None)
+	raise NotYetImplemented('Logging in is a top prioriy for us and we\'ll try to get it working a.s.a.p.!', next = reverse('home'), template = None, context = None)
 
 
 def user_update_name(request):

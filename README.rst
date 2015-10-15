@@ -23,23 +23,23 @@ Let's say you have an app and you want to be able to edit some object belonging 
 		except (IndexError, MultiValueDictKeyError):
 			return render(request, 'not_found.html', {
 				'message': 'A username is needed to look up a user.',
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		except get_user_model().DoesNotExist:
 			return render(request, 'not_found.html', {
 				'message': 'No user by the name "{0:s}".'.format(request.GET['user']),
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		# now check that we have permission to edit users
 		if not request.user.is_authenticated():
 			return render(request, 'permission_denied.html', {
 				'message': 'You need to login to be able to do this ("{0:s}").'.format('change_user'),
-				'next': 'login',
+				'next': reverse('login'),
 			})
 		if not request.user.has_perm('change_user'):
 			return render(request, 'permission_denied.html', {
 				'message': 'You do not have permission to this operation ("{0:s}").'.format('change_user'),
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		# finally check that we're editing our own account, or that we're a staff member
 		if not request.user.pk == editing_user.pk or request.user.is_staff:
@@ -61,12 +61,12 @@ Looks secure! But now we want another view to update the name. Also we'll want t
 		except (IndexError, MultiValueDictKeyError):
 			return render(request, 'not_found.html', {
 				'message': 'A username is needed to look up a user.',
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		except get_user_model().DoesNotExist:
 			return render(request, 'not_found.html', {
 				'message': 'No user by the name "{0:s}".'.format(request.GET['user']),
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		return user
 
@@ -96,9 +96,9 @@ So maybe we can handle the exceptional situations using Exceptions? If we use no
 				get_user_model().USERNAME_FIELD: dic[key]
 			})
 		except (IndexError, MultiValueDictKeyError):
-			raise NotFound('A username is needed to look up a user.', next = 'home')
+			raise NotFound('A username is needed to look up a user.', next = reverse('home'))
 		except get_user_model().DoesNotExist:
-			raise NotFound('No user by the name "{0:s}".'.format(dic[key]), next = 'home')
+			raise NotFound('No user by the name "{0:s}".'.format(dic[key]), next = reverse('home'))
 		return user
 
 	# the twice updated view; note that user_update_email looks almost identical

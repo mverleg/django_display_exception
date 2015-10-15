@@ -11,17 +11,17 @@ def try_to_get_user(dic, key = 'user'):
 			get_user_model().USERNAME_FIELD: dic[key]
 		})
 	except (IndexError, MultiValueDictKeyError):
-		raise NotFound('A username is needed to look up a user.', next = 'home')
+		raise NotFound('A username is needed to look up a user.', next = reverse('home'))
 	except get_user_model().DoesNotExist:
-		raise NotFound('No user by the name "{0:s}".'.format(dic[key]), next = 'home')
+		raise NotFound('No user by the name "{0:s}".'.format(dic[key]), next = reverse('home'))
 	return user
 
 
 def check_user_access(user, perm_code = 'change_user'):
-	if not user.is_authenticated():
-		raise PermissionDenied('You need to login to be able to do this ("{0:s}").'.format(perm_code), next = 'login')
+	if not user.is_authenticated():q
+		raise PermissionDenied('You need to login to be able to do this ("{0:s}").'.format(perm_code), next = reverse('login'))
 	if not user.has_perm(perm_code):
-		raise PermissionDenied('You do not have permission to this operation ("{0:s}").'.format(perm_code), next = 'home')
+		raise PermissionDenied('You do not have permission to this operation ("{0:s}").'.format(perm_code), next = reverse('home'))
 
 
 def check_self_only(active_user, subject_user):

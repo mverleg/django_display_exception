@@ -6,7 +6,6 @@
 
 from django.conf import settings
 from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
 
 
 BASE_TEMPLATE = getattr(settings, 'DISPLAY_EXCEPTIONS_BASE_TEMPLATE', 'exceptions/base.html')
@@ -18,7 +17,6 @@ class DisplayableException(Exception):
 	"""
 	default_status_code = 200
 	default_template = BASE_TEMPLATE
-	default_header = _('Please note...')
 
 	def __init__(self, message, caption = None, next = None, status_code = None, template = None, context = None, *err_args, **err_kwargs):
 		"""
@@ -47,7 +45,7 @@ class DisplayableException(Exception):
 	def render(self, request, exception):
 		context = {
 			'exception': exception,
-			'header': exception.caption,
+			'caption': exception.caption,
 			'message': exception.message,
 			'next': self.next,
 			'EXCEPTION_BASE_TEMPLATE': BASE_TEMPLATE,

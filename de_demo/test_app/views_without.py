@@ -20,23 +20,23 @@ def user_update_name_allhere(request):
 	except (IndexError, MultiValueDictKeyError):
 		return render(request, 'not_found.html', {
 			'message': 'A username is needed to look up a user.',
-			'next': 'home',
+			'next': reverse('home'),
 		})
 	except get_user_model().DoesNotExist:
 		return render(request, 'not_found.html', {
 			'message': 'No user by the name "{0:s}".'.format(request.GET['user']),
-			'next': 'home',
+			'next': reverse('home'),
 		})
 	# now check that we have permission to edit users
 	if not request.user.is_authenticated():
 		return render(request, 'permission_denied.html', {
 			'message': 'You need to login to be able to do this ("{0:s}").'.format('change_user'),
-			'next': 'login',
+			'next': reverse('login'),
 		})
 	if not request.user.has_perm('change_user'):
 		return render(request, 'permission_denied.html', {
 			'message': 'You do not have permission to this operation ("{0:s}").'.format('change_user'),
-			'next': 'home',
+			'next': reverse('home'),
 		})
 	# finally check that we're editing our own account, or that we're a staff member
 	if not request.user.pk == editing_user.pk or request.user.is_staff:
@@ -57,12 +57,12 @@ def user_update_name_allhere(request):
 		except (IndexError, MultiValueDictKeyError):
 			return render(request, 'not_found.html', {
 				'message': 'A username is needed to look up a user.',
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		except get_user_model().DoesNotExist:
 			return render(request, 'not_found.html', {
 				'message': 'No user by the name "{0:s}".'.format(request.GET['user']),
-				'next': 'home',
+				'next': reverse('home'),
 			})
 		return user
 

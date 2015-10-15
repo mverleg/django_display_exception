@@ -1,17 +1,21 @@
 
 {% extends EXCEPTION_BASE_TEMPLATE %}
 
+{% load i18n %}
+
 
 {% block icon %}
 	<span class="glyphicon glyphicon-flag"></span>
 {% endblock icon %}
 
 {% block title %}
-	{% firstof caption 'Not implemented' %}
+	{% trans 'Not implemented' as title %}
+	{% firstof caption title %}
 {% endblock title %}
 
 {% block caption %}
-	{% firstof caption 'Functionality not implemented (yet?)' %}
+	{% trans 'Functionality not implemented (yet?)' as cap %}
+	{% firstof caption cap %}
 {% endblock caption %}
 
 

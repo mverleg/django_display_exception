@@ -1,17 +1,21 @@
 
 {% extends EXCEPTION_BASE_TEMPLATE %}
 
+{% load i18n %}
+
 
 {% block icon %}
 	<span class="glyphicon glyphicon-info-sign"></span>
 {% endblock icon %}
 
 {% block title %}
-	{% firstof caption 'Please note' %}
+	{% trans 'Please note...' as title %}
+	{% firstof caption title %}
 {% endblock title %}
 
 {% block caption %}
-	{% firstof caption 'Please note...' %}
+	{% trans 'Please note...' as cap %}
+	{% firstof caption cap %}
 {% endblock caption %}
 
 
