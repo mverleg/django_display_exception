@@ -10,6 +10,8 @@
 		<meta charset="utf-8">
 		{% trans 'Please note...' as title %}
 		<title>{% block title %}{% firstof caption title %}{% endblock title %}</title>
+		<!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
+		<link rel="icon" href="{% block favicon %}favicon.png{% endblock favicon %}">
 		<meta name="author" content="markv.nl">
 		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/bootstrap/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'exceptions/display_exception.css' %}">
