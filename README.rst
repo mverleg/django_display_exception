@@ -132,10 +132,10 @@ If you want to override the exception templates, you will have to place the over
 
 Third, add the middleware that will handle displaying the exceptions::
 
-    MIDDLEWARE_CLASSES = (
-    	...
-    	'display_exceptions.DisplayExceptionMiddleware',
-    )
+	MIDDLEWARE_CLASSES = (
+		...
+		'display_exceptions.DisplayExceptionMiddleware',
+	)
 
 In this case, you probably want Django Display Exceptions to do it's thing before before any logging or fallbacks or anything. This means that it should be below any such middleware (since it's an exception, which are handled in the same order as responses). So put it somewhere at the bottom.
 
@@ -186,6 +186,19 @@ You can also override templates for each of the exceptions. Just create a file c
 	{% extends EXCEPTION_BASE_TEMPLATE %}
 
 and implement the blocks mentioned.
+
+Handling standard problems
+---------------------------------------
+
+This app is not intended for handling real, unexpected problems, which is why internal server errors aren't included.
+
+That said, if you want some placeholder error handlers anyway, you can put this in your root `urls.py`::
+
+	handler400 = raise_bad_request_exception
+	handler403 = raise_permission_denied_exception
+	handler404 = raise_not_found_exception
+
+Remember that these only appear if `DEBUG = False`.
 
 License
 ---------------------------------------
