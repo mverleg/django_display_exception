@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = 'very_secret_key'
 
-DEBUG = True
+DEBUG = False
 
 INSTALLED_APPS = (
 	'display_exceptions',
@@ -59,5 +59,7 @@ WSGI_APPLICATION = 'wsgi.application'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = join(BASE_DIR, 'static')
+
+ALLOWED_HOSTS = ['*']
 
 
