@@ -28,7 +28,7 @@ class DisplayableException(Exception):
 			:param status_code: If set, overrules the default http status code of this exception.
 			:param template: If set, overrules the default template used to render this exception.
 			:param context: Any extra context for the template (only useful for custom templates).
-			:param err_args: Positional aguments to be passed on to Exception.
+			:param err_args: Positional arguments to be passed on to Exception.
 			:param err_kwargs: Keyword arguments to be passed on to Exception.
 			:return:
 
@@ -42,18 +42,18 @@ class DisplayableException(Exception):
 		self.template = template or self.default_template
 		self.context = context or {}
 
-	def render(self, request, exception):
+	def render(self, request):
 		context = {
-			'exception': exception,
-			'caption': exception.caption,
-			'message': exception.message,
+			'exception': self,
+			'caption': self.caption,
+			'message': self.message,
 			'next': self.next,
 			'EXCEPTION_BASE_TEMPLATE': BASE_TEMPLATE,
 			'LOGIN_URL': settings.LOGIN_URL,
 		}
-		context.update(exception.context)
-		response = render(request, exception.template, context)
-		response.status_code = exception.status_code
+		context.update(self.context)
+		response = render(request, self.template, context)
+		response.status_code = self.status_code
 		return response
 
 
