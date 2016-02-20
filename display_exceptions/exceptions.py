@@ -5,10 +5,21 @@
 """
 
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
+from importlib import import_module
 
 
 BASE_TEMPLATE = getattr(settings, 'DISPLAY_EXCEPTIONS_BASE_TEMPLATE', 'exceptions/base.html')
+
+
+render_func = None
+render_func_name = getattr(settings, 'DISPLAY_EXCEPTIONS_RENDER_FUNC', '').rsplit('.', maxsplit=1)
+if len(render_func_name) > 1:
+	try:
+		render_func = getattr(import_module(render_func_name[0]), render_func_name[1])
+	except (ImportError, AttributeError):
+		raise ImproperlyConfigured('DISPLAY_EXCEPTIONS_RENDER_FUNC is set to {0:} which cannot be imported'.format(render_func_name))
 
 
 class DisplayableException(Exception):
@@ -43,6 +54,8 @@ class DisplayableException(Exception):
 		self.context = context or {}
 
 	def render(self, request):
+		if render_func:
+			return render_func(request, self, template=BASE_TEMPLATE)
 		context = {
 			'exception': self,
 			'caption': self.caption,

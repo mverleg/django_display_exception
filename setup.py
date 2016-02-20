@@ -20,7 +20,7 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='Revised BSD License (LICENSE.txt)',
 	keywords=['django', 'coding-style',],
-	version='1.6',
+	version='1.7',
 	packages=['display_exceptions'],
 	include_package_data=True,
 	zip_safe=False,

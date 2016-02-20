@@ -187,6 +187,8 @@ You can also override templates for each of the exceptions. Just create a file c
 
 and implement the blocks mentioned.
 
+Finally, you can change the rendering function, using ``settings.DISPLAY_EXCEPTIONS_RENDER_FUNC``. It should accept ``request``, ``exception`` and any ``**kwargs`` (forward compatibility).
+
 Handling standard problems
 ---------------------------------------
 
