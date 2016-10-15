@@ -14,7 +14,7 @@ BASE_TEMPLATE = getattr(settings, 'DISPLAY_EXCEPTIONS_BASE_TEMPLATE', 'exception
 
 
 render_func = None
-render_func_name = getattr(settings, 'DISPLAY_EXCEPTIONS_RENDER_FUNC', '').rsplit('.', maxsplit=1)
+render_func_name = getattr(settings, 'DISPLAY_EXCEPTIONS_RENDER_FUNC', '').rsplit('.', 1)
 if len(render_func_name) > 1:
 	try:
 		render_func = getattr(import_module(render_func_name[0]), render_func_name[1])
