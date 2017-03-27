@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-	Adapted from https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
+Adapted from https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 """
 
 from setuptools import setup
