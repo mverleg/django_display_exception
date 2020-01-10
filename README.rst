@@ -31,7 +31,7 @@ Let's say you have an app and you want to be able to edit some object belonging 
 				'next': reverse('home'),
 			})
 		# now check that we have permission to edit users
-		if not request.user.is_authenticated():
+		if not request.user.is_authenticated:
 			return render(request, 'permission_denied.html', {
 				'message': 'You need to login to be able to do this ("{0:s}").'.format('change_user'),
 				'next': reverse('login'),

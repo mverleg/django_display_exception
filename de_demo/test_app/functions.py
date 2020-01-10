@@ -19,7 +19,7 @@ def try_to_get_user(dic, key = 'user'):
 
 
 def check_user_access(user, perm_code = 'change_user'):
-	if not user.is_authenticated():
+	if not user.is_authenticated:
 		raise PermissionDenied('You need to login to be able to do this ("{0:s}").'.format(perm_code), next = reverse('login'))
 	if not user.has_perm(perm_code):
 		raise PermissionDenied('You do not have permission to this operation ("{0:s}").'.format(perm_code), next = reverse('home'))

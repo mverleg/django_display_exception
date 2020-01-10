@@ -1,14 +1,11 @@
 
-"""
-
-"""
-
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
-from test_app.functions import check_user_access, check_self_only
+
+from de_demo.test_app.functions import try_to_get_user, check_user_access, check_self_only
 
 
 def user_update_name_allhere(request):
@@ -28,7 +25,7 @@ def user_update_name_allhere(request):
 			'next': reverse('home'),
 		})
 	# now check that we have permission to edit users
-	if not request.user.is_authenticated():
+	if not request.user.is_authenticated:
 		return render(request, 'permission_denied.html', {
 			'message': 'You need to login to be able to do this ("{0:s}").'.format('change_user'),
 			'next': reverse('login'),
