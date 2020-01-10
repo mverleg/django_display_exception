@@ -4,11 +4,11 @@ Http error descriptions from
 http://www.smartlabsoftware.com/ref/http-status-codes.htm
 """
 
+from importlib import import_module
+
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
-from importlib import import_module
-
 
 BASE_TEMPLATE = getattr(settings, 'DISPLAY_EXCEPTIONS_BASE_TEMPLATE', 'exceptions/base.html')
 

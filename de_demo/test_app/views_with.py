@@ -1,11 +1,13 @@
 
 from random import randint
-from django.core.urlresolvers import reverse
+
+from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.lorem_ipsum import paragraphs, words
-from display_exceptions import NotYetImplemented
 from test_app.functions import try_to_get_user, check_user_access, check_self_only
+
+from display_exceptions import NotYetImplemented
 
 
 def home(request):

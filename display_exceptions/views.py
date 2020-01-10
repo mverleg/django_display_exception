@@ -1,9 +1,14 @@
 
-from display_exceptions import BadRequest, PermissionDenied, NotFound
 from django.utils.translation import ugettext as _
+from django.views import defaults
+
+from display_exceptions import BadRequest, PermissionDenied, NotFound
 
 
-def raise_bad_request_exception(request):
+def raise_bad_request_exception(request=None, exception=None):
+	if exception is not None:
+		assert request is None
+		return defaults.server_error(request, exception)
 	exception = BadRequest(
 		message=_('Your request could not be understood. If you did not do anything special and you are '
 			'using up-to-date software, then this could be caused by a small bug in the website. '
@@ -12,7 +17,10 @@ def raise_bad_request_exception(request):
 	return exception.render(request)
 
 
-def raise_permission_denied_exception(request):
+def raise_permission_denied_exception(request=None, exception=None):
+	if exception is not None:
+		assert request is None
+		return defaults.permission_denied(request, exception)
 	exception = PermissionDenied(
 		message=_('You do not the necessary permission to access this page ({0:s}). Apologies for '
 			'the inconvenience.').format(request.get_full_path()),
@@ -20,7 +28,10 @@ def raise_permission_denied_exception(request):
 	return exception.render(request)
 
 
-def raise_not_found_exception(request):
+def raise_not_found_exception(request=None, exception=None):
+	if exception is not None:
+		assert request is None
+		return defaults.page_not_found(request, exception)
 	exception = NotFound(
 		message=_('The document you were looking for ({0:s}) was not found. Perhaps there is a '
 			'mistake in the url, or the document has been moved. Apologies for the inconvenience.')

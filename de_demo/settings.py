@@ -1,7 +1,7 @@
 
 import os
-from tempfile import gettempdir
 from os.path import join
+from tempfile import gettempdir
 
 DISPLAY_EXCEPTIONS_BASE_TEMPLATE = 'exceptions/base.html'  # optional setting
 

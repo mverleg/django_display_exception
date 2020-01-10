@@ -1,7 +1,8 @@
 
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
+
 from display_exceptions import PermissionDenied, NotFound
 
 
