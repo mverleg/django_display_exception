@@ -1,0 +1,21 @@
+
+{% extends EXCEPTION_BASE_TEMPLATE %}
+
+{% load i18n %}
+
+
+{% block icon %}
+	<span class="glyphicon glyphicon-fire"></span>
+{% endblock icon %}
+
+{% block title %}
+	{% trans 'Technical problems' as title %}
+	{% firstof caption title %}
+{% endblock title %}
+
+{% block caption %}
+	{% trans 'A technical problem occurred; please try again later or notify us' as cap %}
+	{% firstof caption cap %}
+{% endblock caption %}
+
+

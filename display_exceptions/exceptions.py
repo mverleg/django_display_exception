@@ -126,3 +126,13 @@ class NotYetImplemented(DisplayableException):
 	default_template = 'exceptions/not_implemented.html'
 
 
+class TechnicalError(DisplayableException):
+	"""
+	500 Internal Server Error
+
+	Something went wrong in the server, for example a service that was not available.
+	"""
+	default_status_code = 500
+	default_template = 'exceptions/technical.html'
+
+

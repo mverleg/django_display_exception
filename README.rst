@@ -153,6 +153,7 @@ The exceptions that are built in, and that are caught by the middleware:
 * *BadRequest* (400 BadRequest): what the user sent is not correctly formatted (e.g. non-integer id).
 * *NotYetImplemented* (501 Not Implemented): the requested functionality isn't supported yet.
 * *Notification* (200 Ok): no error, just display something.
+* *TechnicalError* (500 Internal Server Error): there was a technical issue, like an unresponsive service.
 
 If there's no suitable exception in the list, you can subclass ``DisplayableException`` yourself.
 
